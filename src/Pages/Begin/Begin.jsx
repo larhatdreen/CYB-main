@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom'; // Импортируем useLoc
 
 import ProfileBtn from '../../Components/ProfileBtn/ProfileBtn';
 import Selecter from '../../Components/Selecter/Selecter';
-import PDFViewer from '../../Components/PDFViewer/PDFViewer';
+import PdfViewer from '../../Components/PdfViewer/PdfViewer';
 import VideoPage from '../../Components/VideoPage/VideoPage';
 
 import health from '../../Assets/svg/health.svg';
@@ -28,12 +28,6 @@ export default function Begin({ userId, data }) {
     }
   }, []);
 
-  // Автоматический импорт всех изображений begin*
-  const importAll = (context) => context.keys().map(context);
-  const pdfList = importAll(
-    require.context('../../Assets/pdf/begin/', false, /begin_pdf_\d+\.(jpe?g)$/)
-  );
-
   const handleSelect = (index) => {
     setActiveIndex(index);
     setVideoView(index === 1);
@@ -56,7 +50,7 @@ export default function Begin({ userId, data }) {
           activeIndex={activeIndex}
         />
         {!videoView ? (
-          <PDFViewer pdf_list={pdfList} />
+          <PdfViewer />
         ) : (
           <VideoPage video={begin} page="/begin" userId={userId} instruction={true} />
         )}
